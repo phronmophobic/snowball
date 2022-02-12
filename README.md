@@ -109,6 +109,10 @@ You can use a specific version by providing one of the following:
 `:deps`: path-to-deps.edn
 
 
+## Related
+
+[tools.deps.graph](https://github.com/clojure/tools.deps.graph): A tool for making deps.edn dependency graphs.
+
 ## License
 
 Copyright © 2021 Adrian
