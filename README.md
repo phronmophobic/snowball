@@ -49,15 +49,15 @@ Use a local root in the current directory "."
 
 Either `:deps` or `:lib` must be specified.
 
-`:lib`: The lib coordinate name. Example: `org.clojure/clojure`.
-`:deps`: The path to a `deps.edn` path.
+`:lib`: The lib coordinate name. Example: `org.clojure/clojure`.  
+`:deps`: The path to a `deps.edn` path.  
 
 ### Optional
 
-`:view`: One of `treemap`, `treemap-image`, or `print`.
-    `treemap` (default): This will open a Swing window that shows a treemap of the dependencies. Area corresponds to size.
-    `treemap-image`: Save a treemap as an image to :path. Default :path is "snowball.png".
-    `print`: Prints a table of dependencies and sizes sorted by size.
+`:view`: One of `treemap`, `treemap-image`, or `print`.  
+    `treemap` (default): This will open a Swing window that shows a treemap of the dependencies. Area corresponds to size.  
+    `treemap-image`: Save a treemap as an image to :path. Default :path is "snowball.png".  
+    `print`: Prints a table of dependencies and sizes sorted by size.  
 
 
 `:path`: Specify a path when used with :view treemap-image. Ignored otherwise.
@@ -66,7 +66,7 @@ Either `:deps` or `:lib` must be specified.
 
 `:mvn/version`: mvn-version
 	
-`:git/sha`: sha
+`:git/sha`: sha  
 `:git/url`: url
 	
 `:local/root`: root
