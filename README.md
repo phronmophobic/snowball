@@ -55,17 +55,19 @@ Either `:deps` or `:lib` must be specified.
 ### Optional
 
 `:view`: One of `treemap`, `treemap-image`, or `print`.  
-    `treemap` (default): This will open a Swing window that shows a treemap of the dependencies. Area corresponds to size.  
-    `treemap-image`: Save a treemap as an image to :path. Default :path is "snowball.png".  
-    `print`: Prints a table of dependencies and sizes sorted by size.  
+* `treemap` (default): This will open a Swing window that shows a treemap of the dependencies. Area corresponds to size.  
+* `treemap-image`: Save a treemap as an image to :path. Default :path is "snowball.png".  
+* `print`: Prints a table of dependencies and sizes sorted by size.  
 
 
 `:path`: Specify a path when used with :view treemap-image. Ignored otherwise.
 
 #### Specifying a version
 
+You can use a specific version by providing one of the following:
+
 `:mvn/version`: mvn-version
-	
+
 `:git/sha`: sha  
 `:git/url`: url
 	
