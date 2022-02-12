@@ -13,7 +13,9 @@ clojure -X:snowball :lib thheller/shadow-cljs :view treemap-image
 ### Table in terminal
 
 ```sh
-$ clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
+clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
+```
+```sh
                  namespace |                               name | transitive-size |     self-size
 -------------------------------------------------------------------------------------------------
             org.graalvm.js |                                 js |      43,361,897 |    18,305,220
