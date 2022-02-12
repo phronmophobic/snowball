@@ -42,7 +42,7 @@ If no version if is provided, {:mvn/version "RELEASE"} is used.
 	:mvn/version mvn-version
 	
 	:git/sha sha
-	:gir/url url
+	:git/url url
 	
 	:local/root root
 	
