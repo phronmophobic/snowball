@@ -37,27 +37,39 @@ Create an alias for snowball
 
 Show the treemap for the local deps file "deps.edn"
 
-        clojure -X:snowball :deps deps.edn
+```sh
+clojure -X:snowball :deps deps.edn
+```
 
 Print the sizes for the local deps file "deps.edn"
 
-        clojure -X:snowball :deps deps.edn :view print
+```sh
+clojure -X:snowball :deps deps.edn :view print
+```
 
 Save a treemap image to "sizes.png" for the local deps file "deps.edn"
 
-        clojure -X:snowball :deps deps.edn :view treemap-image :path sizes.png
+```sh
+clojure -X:snowball :deps deps.edn :view treemap-image :path sizes.png
+```
 
 Use a specific Maven version
 
-        clojure -X:snowball :lib cnuernber/dtype-next :mvn/version  '"9.011"'
+```sh
+clojure -X:snowball :lib cnuernber/dtype-next :mvn/version  '"9.011"'
+```
 
 Use a specific git version
 
-        clojure -X:snowball :lib thheller/shadow-cljs :git/url '"https://github.com/thheller/shadow-cljs"' :git/sha '"46b73e161732d3a38a0c797119260775b78c8e93"'
+```sh
+clojure -X:snowball :lib thheller/shadow-cljs :git/url '"https://github.com/thheller/shadow-cljs"' :git/sha '"46b73e161732d3a38a0c797119260775b78c8e93"'
+```
 
 Use a local root in the current directory "."
 
-        clojure -X:snowball :lib my-local/lib :local/root .
+```sh
+clojure -X:snowball :lib my-local/lib :local/root .
+```
 
 
 ## Options
