@@ -27,8 +27,12 @@ Create an alias for snowball
 
 {
  :aliases {
-           :snowball {:exec-fn com.phronemophobic.snowball/-main}
- }
+
+           :snowball
+           {:exec-fn com.phronemophobic.snowball/-main
+            :replace-deps {com.phronemophobic/snowball {:mvn/version "1.0"}}}
+           
+           }
 }
 ```
 
