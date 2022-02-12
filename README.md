@@ -108,7 +108,7 @@ Either `:deps` or `:lib` must be specified.
 
 #### Specifying a version
 
-You can use a specific version by providing one of the following:
+You can use a specific version by providing one of the following. If no version is provided, then `{:mvn/version "RELEASE"}` is used.
 
 `:mvn/version`: mvn-version
 
