@@ -39,7 +39,7 @@ Create an alias for snowball
 ## Examples
 
 
-Show the treemap for the local deps file "deps.edn"
+Show the interactive treemap for the local deps file "deps.edn"
 
 ```sh
 clojure -X:snowball :deps deps.edn
