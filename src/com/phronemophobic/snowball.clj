@@ -2,7 +2,6 @@
   (:require [clojure.tools.build.api :as b]
             clojure.tools.deps.alpha
             [treemap-clj.core :as treemap]
-            [treemap-clj.view :as tview]
             [clojure.zip :as z]
             [membrane.ui :as ui]
             ;; (require 'membrane.java2d)
@@ -169,7 +168,8 @@
   ([rect]
    (render-depth rect 0.2))
   ([rect opacity]
-   (let [mdepth (treemap/max-depth rect)]
+   (let [mdepth (treemap/max-depth rect)
+         color-gradient (requiring-resolve 'treemap-clj.view/color-gradient)]
      (loop [to-visit (seq [[0 0 0 rect]])
             view []]
        (if to-visit
@@ -195,7 +195,7 @@
                               (ui/translate (+ (:x rect) ox) (+ (:y rect) oy)
                                             [(ui/with-color (conj (if children?
                                                                     [0 0 0]
-                                                                    (tview/color-gradient (/ depth mdepth))
+                                                                    (color-gradient (/ depth mdepth))
                                                                     )
                                                                   opacity)
                                                (ui/rectangle (max 1 (dec (:w rect)))
@@ -237,12 +237,12 @@
 
 
         ]
-    (tview/wrap-treemap-events tm tm-rendered))
+    ((requiring-resolve 'treemap-clj.view/wrap-treemap-events) tm tm-rendered))
   )
 
 (defn size-treemap [basis]
   ((requiring-resolve 'membrane.java2d/run-sync)
-   (component/make-app #'tview/treemap-explore {:tm-render (basis->treemap basis)})
+   (component/make-app (requiring-resolve 'treemap-clj.view/treemap-explore) {:tm-render (basis->treemap basis)})
    {:window-start-width 1350
     :window-start-height 700
     :window-title "Snowball"}))
@@ -252,53 +252,6 @@
    fname
    (basis->treemap basis))
   (println "Saved to " fname "."))
-
-(comment
-
-  (size-treemap
-   (b/create-basis {:project
-                    {:deps '{com.github.seancorfield/depstar {:mvn/version "2.1.303"}}}}))
-
-  (def tm (treemap/treemap (root-coord lib-tree)
-                           (treemap/make-rect 600 600)
-                           (merge
-                            treemap/treemap-options-defaults
-                            {:size :transitive-size
-                             :keypath-fn
-                             (fn [coord]
-                               (cons
-                                '(find self)
-                                (map #(list 'find %)
-                                     (:children coord))))
-                             :branch? #(-> % :children seq)
-                             :children (fn [coord]
-                                         (cons
-                                          {:name (str "self-"
-                                                      (:name coord))
-                                           :transitive-size (:size coord)}
-                                          (->> coord
-                                               :children
-                                               (map #(get lib-tree %)))))})))
-  
-
-  (def tm-rendered [(tview/render-depth tm)
-                    ;; (tview/render-background-types tm)
-                    ;; (tview/render-keys tm)
-                    (tview/render-hierarchy-lines tm)
-                    ;; (tview/render-value-labels tm)
-                    (render-dots-zip tm)
-                    ])
-
-  
-  ;; (membrane.java2d/save-to-image! "treemap.png" tm-rendered )
-  ;; (membrane.skia/draw-to-image! "treemap.png" tm-rendered)
-
-  
-  (skia/run (component/make-app #'tview/treemap-explore {:tm-render (skia/->Cached (tview/wrap-treemap-events tm tm-rendered))}))
-
-
-  ,)
-
 
 (defn opts->basis [{version :mvn/version
                     sha :git/sha
