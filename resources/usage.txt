@@ -1,0 +1,78 @@
+Usage:
+  clojure -X:snowball :lib lib-coord
+
+Snowball will display dependency sizes.
+
+---------------------------------------
+Additional Args
+---------------------------------------
+
+:view view
+
+	There are 3 ways to view dependency sizes.
+	The view can be selected with the :view option.
+        
+        The three valid :view values are: treemap, treemap-image, print
+	
+	:view treemap
+	
+	      (default) 
+	      This will open a Swing window that shows a treemap of the dependencies.
+	      Area corresponds to size.
+	
+	:view treemap-image
+	
+	      Save a treemap as an image to :path. Default :path is "snowball.png".
+	
+	:view print
+	
+	      Prints a table of dependencies and sizes sorted by size.
+
+:path image-path.png
+
+      Specify a path when used with :view treemap-image. Ignored otherwise.
+
+--------------------------------------
+Version Specification
+--------------------------------------
+
+There are 4 ways to specify a specific lib version. 
+If no version if is provided, {:mvn/version "RELEASE"} is used.
+
+	:mvn/version mvn-version
+	
+	:git/sha sha
+	:gir/url url
+	
+	:local/root root
+	
+	:deps path-to-deps.edn
+
+--------------------------------------
+Examples
+-------------------------------------
+
+* Show the treemap for the local deps file "deps.edn"
+
+        clojure -X:snowball :deps deps.edn
+
+* Print the sizes for the local deps file "deps.edn"
+
+        clojure -X:snowball :deps deps.edn :view print
+
+* Save a treemap image to "sizes.png" for the local deps file "deps.edn"
+
+        clojure -X:snowball :deps deps.edn :view treemap-image :path sizes.png
+
+* Use a specific Maven version
+
+        clojure -X:snowball :lib cnuernber/dtype-next :mvn/version  '"9.011"'
+
+* Use a specific git version
+
+        clojure -X:snowball :lib thheller/shadow-cljs :git/url '"https://github.com/thheller/shadow-cljs"' :git/sha '"46b73e161732d3a38a0c797119260775b78c8e93"'
+
+* Use a local root in the current directory "."
+
+        clojure -X:snowball :lib my-local/lib :local/root .
+        

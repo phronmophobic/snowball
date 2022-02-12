@@ -1,0 +1,38 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        io.github.clojure/tools.build {:git/tag "v0.7.5" :git/sha "34727f7"}
+        org.clojure/tools.deps.alpha {:mvn/version "0.12.1148", :deps/manifest :mvn}
+        com.phronemophobic/treemap-clj { ;;:mvn/version "0.2.4"
+                                        :local/root "../treemap-clj"
+                                        }
+        com.phronemophobic/membrane {:mvn/version "0.9.31.8-beta"
+                                     ;; :local/root "../membrane2"
+                                     }
+        com.phronemophobic.membrane/skialib-macosx-aarch64
+        {:mvn/version "0.9.31.0-beta"
+         ;;:local/root "../membrane2/csource/macos-aarch64"
+         }}
+ :aliases
+ {:run-m {:main-opts ["-m" "com.phronemophobic.snowball"]}
+  :snowball {:exec-fn com.phronemophobic.snowball/-main
+             :exec-args {}}
+
+  :print-sizes
+  {:ns-default com.phronemophobic.snowball
+   :exec-fn print-sizes
+   :exec-args {}}
+  
+
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
+  :runner
+  {:extra-deps {io.github.cognitect-labs/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "2d69f33d7980c3353b246c28f72ffeafbd9f2fab"}}
+   :exec-fn cognitect.test-runner.api/test}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.303"}}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true
+                        :jar "snowball.jar"
+                        :main-class "com.phronemophobic.snowball"
+                        :sync-pom true}}}}
