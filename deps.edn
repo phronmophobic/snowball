@@ -2,20 +2,23 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
         io.github.clojure/tools.build {:git/tag "v0.7.5" :git/sha "34727f7"}
         org.clojure/tools.deps.alpha {:mvn/version "0.12.1148", :deps/manifest :mvn}
-        com.phronemophobic/treemap-clj { ;;:mvn/version "0.2.4"
-                                        :local/root "../treemap-clj"
+        com.phronemophobic/treemap-clj { :mvn/version "0.2.5"
+                                        ;; :local/root "../treemap-clj"
                                         }
         com.phronemophobic/membrane {:mvn/version "0.9.31.8-beta"
                                      ;; :local/root "../membrane2"
                                      }
-        com.phronemophobic.membrane/skialib-macosx-aarch64
-        {:mvn/version "0.9.31.0-beta"
-         ;;:local/root "../membrane2/csource/macos-aarch64"
-         }}
+        }
  :aliases
  {:run-m {:main-opts ["-m" "com.phronemophobic.snowball"]}
   :snowball {:exec-fn com.phronemophobic.snowball/-main
              :exec-args {}}
+
+  :project
+  {:extra-deps {com.phronemophobic.membrane/skialib-macosx-aarch64
+                {:mvn/version "0.9.31.0-beta"
+                 ;;:local/root "../membrane2/csource/macos-aarch64"
+                 }}}
 
   :print-sizes
   {:ns-default com.phronemophobic.snowball
