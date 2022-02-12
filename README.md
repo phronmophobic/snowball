@@ -13,11 +13,20 @@ clojure -X:snowball :lib thheller/shadow-cljs :view treemap-image
 ### Table in terminal
 
 ```sh
-clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
+$ clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
+                 namespace |                               name | transitive-size |     self-size
+-------------------------------------------------------------------------------------------------
+            org.graalvm.js |                                 js |      43,361,897 |    18,305,220
+               com.ibm.icu |                              icu4j |      13,298,680 |    13,298,680
+     com.google.javascript |          closure-compiler-unshaded |      13,008,835 |    13,008,835
+       org.graalvm.truffle |                        truffle-api |       8,362,026 |     8,362,026
+               org.clojure |             google-closure-library |       5,970,746 |     5,970,746
+               org.clojure |                      clojurescript |       4,892,746 |     4,892,746
+               org.clojure |                            clojure |       4,539,616 |     3,914,649
+                  thheller |                        shadow-cljs |      78,811,694 |     2,988,201
+         org.graalvm.regex |                              regex |       2,816,757 |     2,816,757
+               io.undertow |                      undertow-core |       3,530,146 |     2,343,146
 ```
-
-![shadow-cljs](/snowball-print.png?raw=true)
-
 
 ## Usage
 
