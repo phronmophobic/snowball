@@ -2,6 +2,19 @@
 
 View the sizes of your dependencies.
 
+
+```sh
+clojure -X:snowball :lib thheller/shadow-cljs :view treemap-image
+```
+![shadow-cljs](/snowball.png?raw=true)
+
+```sh
+clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
+```
+
+![shadow-cljs](/snowball-print.png?raw=true)
+
+
 ## Usage
 
 Create an alias for snowball
