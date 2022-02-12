@@ -3,10 +3,14 @@
 View the sizes of your dependencies.
 
 
+### Treemap
+
 ```sh
 clojure -X:snowball :lib thheller/shadow-cljs :view treemap-image
 ```
 ![shadow-cljs](/snowball.png?raw=true)
+
+### Table in terminal
 
 ```sh
 clojure -X:snowball :lib thheller/shadow-cljs :view print | head -12
