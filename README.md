@@ -38,11 +38,13 @@ Create an alias for snowball
 
 {
  :aliases {
-
+```
+```clojure
            :snowball
            {:exec-fn com.phronemophobic.snowball/-main
             :replace-deps {com.phronemophobic/snowball {:mvn/version "1.0"}}}
-           
+```
+```clojure
            }
 }
 ```
@@ -118,6 +120,19 @@ You can use a specific version by providing one of the following. If no version 
 `:local/root`: root
 	
 `:deps`: path-to-deps.edn
+
+## Usage with lein projects
+
+Snowball doesn't work directly with lein projects, but it can be run against any mvn library so the workaround is something like:
+
+```sh
+$ lein install
+Created /Users/adrian/workspace/membrane-re-frame-example/target/membrane-re-frame-example-0.1.0-SNAPSHOT.jar
+Wrote /Users/adrian/workspace/membrane-re-frame-example/pom.xml
+Installed jar and pom into local repo.
+# Note the project name and version
+$ clojure -X:snowball :lib membrane-re-frame-example :mvn/version '"0.1.0-SNAPSHOT"'
+```
 
 
 ## Related
