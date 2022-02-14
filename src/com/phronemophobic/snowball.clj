@@ -150,15 +150,20 @@
         tree+names+sizes (into
                           {}
                           (map (fn [[k v]]
-                                 [k (assoc v
-                                           :name k
-                                           :size (coord-size tree v))]))
+                                 (let [size (coord-size tree v)]
+                                  [k (assoc v
+                                            :name k
+                                            :size-readable (human-readable size)
+                                            :size size)])))
                           tree)
         tree+names+sizes+transitive-sizes
         (into
          {}
          (map (fn [[k v]]
-                [k (assoc v :transitive-size (transitive-coord-size tree+names+sizes v))]))
+                (let [transitive-size (transitive-coord-size tree+names+sizes v)]
+                 [k (assoc v
+                           :transitive-size transitive-size
+                           :transitive-size-readable (human-readable transitive-size))])))
          tree+names+sizes)]
     tree+names+sizes+transitive-sizes))
 
