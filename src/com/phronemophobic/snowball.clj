@@ -66,7 +66,7 @@
 
 (defn render-labels [tm]
   (let [tm (rects->absolute tm)
-        rects (reverse (sort-by :size (tree-seq :children :children tm)))
+        rects (reverse (sort-by #(-> % :obj :size) (tree-seq :children :children tm)))
 
         [rtree labels]
         (reduce
