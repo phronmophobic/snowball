@@ -341,7 +341,12 @@
                                                (str (f lib)))
                                              columns))))))
 
+(defn print-edn [basis]
+  (binding [*print-length* false]
+    (prn (basis->size-tree basis))))
 
+(defn print-json [basis]
+  (json/write (basis->size-tree basis) *out*))
 
 (defn print-usage []
   (print (slurp ((requiring-resolve 'clojure.java.io/resource) "usage.txt"))))
@@ -356,8 +361,10 @@
       "treemap-image" (treemap-image (opts->basis m) (str path))
       "print" (print-sizes (opts->basis m))
       "csv" (print-csv (opts->basis m))
-      "edn" (treemap-edn (opts->basis m))
-      "json" (treemap-json (opts->basis m))
+      "edn" (print-edn (opts->basis m))
+      "json" (print-json (opts->basis m))
+      "treemap-edn" (treemap-edn (opts->basis m))
+      "treemap-json" (treemap-json (opts->basis m))
       ;; else
       (print-usage))
     (print-usage))
