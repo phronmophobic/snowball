@@ -309,6 +309,26 @@
                                            (format (str "%,15d") transitive-size)
                                            (format (str "%,13d") size)])))))
 
+(defn print-csv [basis]
+  (let [lib-tree (basis->size-tree basis)
+        top-libs (->> lib-tree
+                      vals
+                      (sort-by :size)
+                      reverse)
+        columns [
+                 ["namespace" #(-> % :name namespace)]
+                 ["name" #(-> % :name name)]
+                 ["transitive-size" :transitive-size]
+                 ["transitive-size-readable" :transitive-size-readable]
+                 ["self-size" :size]
+                 ["self-size-readable" :size-readable]]
+        ]
+    (println (clojure.string/join "," (map first columns)))
+    (doseq [lib top-libs]
+      (println (clojure.string/join "," (map (fn [[_column-name f]]
+                                               (str (f lib)))
+                                             columns))))))
+
 
 
 (defn print-usage []
@@ -323,6 +343,7 @@
       "treemap" (size-treemap (opts->basis m))
       "treemap-image" (treemap-image (opts->basis m) (str path))
       "print" (print-sizes (opts->basis m))
+      "csv" (print-csv (opts->basis m))
       
       ;; else
       (print-usage))
