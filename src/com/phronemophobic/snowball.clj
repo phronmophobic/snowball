@@ -4,6 +4,7 @@
             [treemap-clj.core :as treemap]
             [clojure.zip :as z]
             [membrane.ui :as ui]
+            [clojure.data.json :as json]
             ;; (require 'membrane.java2d)
             [treemap-clj.rtree :as rtree]
             [membrane.component :as component])
@@ -234,20 +235,18 @@
                                             :transitive-size (:size coord)}
                                            (->> coord
                                                 :children
-                                                (map #(get lib-tree %)))))}))
-        ;; _ (def atm tm)
-        tm-rendered [(render-depth tm)
-                     (render-labels tm)]
+                                                (map #(get lib-tree %)))))}))]
+    tm))
 
-
-
-        ]
-    ((requiring-resolve 'treemap-clj.view/wrap-treemap-events) tm tm-rendered))
-  )
+(defn render-treemap [tm]
+  (let [rendered [(render-depth tm)
+                  (render-labels tm)]]
+   ((requiring-resolve 'treemap-clj.view/wrap-treemap-events) tm rendered)))
 
 (defn size-treemap [basis]
   ((requiring-resolve 'membrane.java2d/run-sync)
-   (component/make-app (requiring-resolve 'treemap-clj.view/treemap-explore) {:tm-render (basis->treemap basis)})
+   (component/make-app (requiring-resolve 'treemap-clj.view/treemap-explore) {:tm-render (-> (basis->treemap basis)
+                                                                                             (render-treemap))})
    {:window-start-width 1350
     :window-start-height 700
     :window-title "Snowball"}))
@@ -255,8 +254,21 @@
 (defn treemap-image [basis fname]
   ((requiring-resolve 'membrane.java2d/save-to-image!)
    fname
-   (basis->treemap basis))
+   (-> (basis->treemap basis)
+       (render-treemap)))
   (println "Saved to " fname "."))
+
+(defn treemap-edn [basis]
+  (binding [*print-length* false]
+    (prn (clojure.walk/prewalk
+          (fn [obj]
+            (if (record? obj)
+              (into {} obj)
+              obj))
+          (basis->treemap basis)))))
+
+(defn treemap-json [basis]
+  (json/write (basis->treemap basis) *out*))
 
 (defn opts->basis [{version :mvn/version
                     sha :git/sha
@@ -344,7 +356,8 @@
       "treemap-image" (treemap-image (opts->basis m) (str path))
       "print" (print-sizes (opts->basis m))
       "csv" (print-csv (opts->basis m))
-      
+      "edn" (treemap-edn (opts->basis m))
+      "json" (treemap-json (opts->basis m))
       ;; else
       (print-usage))
     (print-usage))
