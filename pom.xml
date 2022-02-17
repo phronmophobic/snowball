@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.phronemophobic</groupId>
   <artifactId>snowball</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <name>com.phronemophobic/snowball</name>
   <description>FIXME: my new application.</description>
   <url>https://github.com/com.phronemophobic/snowball</url>
@@ -22,9 +22,14 @@
     <url>https://github.com/com.phronemophobic/snowball</url>
     <connection>scm:git:git://github.com/com.phronemophobic/snowball.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/com.phronemophobic/snowball.git</developerConnection>
-    <tag>v1.0</tag>
+    <tag>v1.1</tag>
   </scm>
   <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>data.json</artifactId>
+      <version>2.4.0</version>
+    </dependency>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
