@@ -100,11 +100,15 @@ Either `:deps` or `:lib` must be specified.
 
 ### Optional
 
-`:view`: One of `treemap`, `treemap-image`, or `print`.  
+`:view`: One of the following:  
 * `treemap` (default): This will open a Swing window that shows a treemap of the dependencies. Area corresponds to size.  
 * `treemap-image`: Save a treemap as an image to :path. Default :path is "snowball.png".  
 * `print`: Prints a table of dependencies and sizes sorted by size.  
-
+* `csv`: Prints a csv list of dependencies and sizes.  
+* `edn`: Prints an edn map of dependencies and sizes.  
+* `json`: Prints a json map of dependencies and sizes.  
+* `treemap-json`: Prints a the treemap layout as json. See [description](https://github.com/phronmophobic/treemap-clj#rendering-your-own-treemap-layers).  
+* `treemap-edn`: Prints a the treemap layout as edn. See [description](https://github.com/phronmophobic/treemap-clj#rendering-your-own-treemap-layers).  
 
 `:path`: Specify a path when used with :view treemap-image. Ignored otherwise.
 

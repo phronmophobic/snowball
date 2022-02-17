@@ -12,7 +12,7 @@ Additional Args
 	There are 3 ways to view dependency sizes.
 	The view can be selected with the :view option.
         
-        The three valid :view values are: treemap, treemap-image, print
+        The valid :view values are:
 	
 	:view treemap
 	
@@ -27,6 +27,26 @@ Additional Args
 	:view print
 	
 	      Prints a table of dependencies and sizes sorted by size.
+
+        :view csv
+
+              Prints a csv list of dependencies and sizes.
+
+        :view edn
+
+              Prints an edn map of dependencies and sizes.
+
+        :view json
+
+              Prints an edn map of dependencies and sizes.
+
+        :view treemap-json
+
+              Prints a the treemap layout as json. See https://github.com/phronmophobic/treemap-clj#rendering-your-own-treemap-layers.
+
+        :view treemap-edn
+
+              Prints a the treemap layout as edn. See https://github.com/phronmophobic/treemap-clj#rendering-your-own-treemap-layers.
 
 :path image-path.png
 
