@@ -126,12 +126,15 @@
                0
                transitive-coords)))
 
+(defn top-level-coord? [coord]
+  (-> coord :dependents nil?))
+
 (defn top-level-deps [lib-tree]
   (->> lib-tree
        (keep (fn [[lib coord]]
                ;; based on clojure.tools.deps.alpha/print-tree
                ;; implementation for finding root deps
-               (when (-> coord :dependents nil?)
+               (when (top-level-coord? coord)
                  lib)))))
 
 (defn root-coord [lib-tree]
@@ -152,10 +155,11 @@
                           {}
                           (map (fn [[k v]]
                                  (let [size (coord-size tree v)]
-                                  [k (assoc v
-                                            :name k
-                                            :size-readable (human-readable size)
-                                            :size size)])))
+                                   [k (assoc v
+                                             :name k
+                                             :top-level (top-level-coord? v)
+                                             :size-readable (human-readable size)
+                                             :size size)])))
                           tree)
         tree+names+sizes+transitive-sizes
         (into
