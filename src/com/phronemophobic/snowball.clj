@@ -16,10 +16,10 @@
 (defn human-readable [size]
   (some (fn [[num suffix]]
           (when (> size num)
-            (let [coefficient (/ size num)
+            (let [coefficient (double (/ size num))
                   num-str (if (< coefficient 10)
                             (format "%.1f" coefficient)
-                            (-> (double coefficient) (Math/round) int))]
+                            (-> coefficient (Math/round) int))]
               (str num-str suffix))))
         [[1e12 "T"]
          [1e9 "G"]
