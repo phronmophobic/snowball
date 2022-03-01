@@ -5,7 +5,7 @@
   <artifactId>snowball</artifactId>
   <version>1.2</version>
   <name>com.phronemophobic/snowball</name>
-  <description>FIXME: my new application.</description>
+  <description>View the sizes of your dependencies.</description>
   <url>https://github.com/com.phronemophobic/snowball</url>
   <licenses>
     <license>
