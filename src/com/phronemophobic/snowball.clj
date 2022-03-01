@@ -15,7 +15,7 @@
 
 (defn human-readable [size]
   (some (fn [[num suffix]]
-          (when (> size num)
+          (when (>= size num)
             (let [coefficient (double (/ size num))
                   num-str (if (< coefficient 10)
                             (format "%.1f" coefficient)
