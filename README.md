@@ -42,7 +42,7 @@ Create an alias for snowball
 ```clojure
            :snowball
            {:exec-fn com.phronemophobic.snowball/-main
-            :replace-deps {com.phronemophobic/snowball {:mvn/version "1.1"}}}
+            :replace-deps {com.phronemophobic/snowball {:mvn/version "1.2"}}}
 ```
 ```clojure
            }
