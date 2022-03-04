@@ -14,18 +14,18 @@
 
 
 (defn human-readable [size]
-  (some (fn [[num suffix]]
-          (when (>= size num)
-            (let [coefficient (double (/ size num))
-                  num-str (if (< coefficient 10)
-                            (format "%.1f" coefficient)
-                            (-> coefficient (Math/round) int))]
-              (str num-str suffix))))
-        [[1e12 "T"]
-         [1e9 "G"]
-         [1e6 "M"]
-         [1e3 "k"]
-         [1 ""]]))
+  (or (some (fn [[num suffix]]
+              (when (>= size num)
+                (let [coefficient (double (/ size num))
+                      num-str (if (< coefficient 10)
+                                (format "%.1f" coefficient)
+                                (-> coefficient (Math/round) int))]
+                  (str num-str suffix))))
+            [[1e12 "T"]
+             [1e9 "G"]
+             [1e6 "M"]
+             [1e3 "k"]])
+      (str size)))
 
 (defn overlaps? [rt [x y w h]]
   (-> (.search ^RTree rt (Geometries/rectangle
