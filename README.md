@@ -2,6 +2,7 @@
 
 View the sizes of your dependencies.
 
+Built with [membrane](https://github.com/phronmophobic/membrane).
 
 ### Treemap
 
